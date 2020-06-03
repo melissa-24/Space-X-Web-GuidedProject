@@ -13,13 +13,13 @@ test("App fetches and renders missions data", async ()=>{
   // expect(false).toBe(false);
   mockFetchMissions.mockResolvedValueOnce({data: missionsFixture});
 
-  const {getByText, queryAllByText} = render(<App />);
+  const {getByText, queryAllByTestId} = render(<App />);
 
   const button = getByText(/get data/i);
   fireEvent.click(button);
   getByText(/we are fetching data/i);
 
   await waitFor(()=>{
-    expect(queryAllByText(/kirkby moonshot/i)).toHaveLength(1);
+    expect(queryAllByTestId("mission")).toHaveLength(2);
   });
 })
